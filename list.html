@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./src/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./src/css/listStyle.css">
+    <title>Lista de Produtos</title>
+</head>
+<body>
+     <!--            LISTA VAZIA                -->
+    <div class="hidden" id="empty">
+        <div class="container">
+            <header>
+                <div>
+                    <h1>Lista de produtos</h1>
+                </div>
+                <section>
+                    <a href="./manager.html">
+                        <div>
+                            <p>Gerenciar produtos</p>
+                        </div>
+                    </a>
+                </section>
+            </header>
+            <div id="initial-content">
+                <p>Adicione algum produto...</p>
+            </div>
+        </div>
+    </div>
+
+    <!--            LISTA PREENCHIDA                -->
+    <div class="container" id="filled">
+        <header>
+            <div>
+                <h1>Lista de produtos</h1>
+            </div>
+            <section>
+                <a href="./manager.html">
+                    <div>
+                        <p>Gerenciar produtos</p>
+                    </div>
+                </a>
+            </section>
+        </header>
+        <section id="products">
+            <!-- <section id="prod">
+                <p id="name-prod">Nome do produto</p>
+                <p id="quant-prod">Quantidade: X</p>
+                <p id="cod-prod">Código: X</p>
+                <button id="desc-prod">Descrição do produto</button>
+            </section>
+            <section class="hidden" id="description">
+                teste
+            </section>
+            <hr> -->
+            <!-- <h1>Este é o fim da sua lista...</h1> -->
+        </section>
+    </div>
+
+    <script src="./src/js/list.js"></script>
+</body>
+</html>

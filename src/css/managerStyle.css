@@ -1,0 +1,271 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+:root{
+    --cor1: #87adff;
+    --cor2: #6387D5;
+    --cor3: #666E80;
+    --cor4: #474B55;
+    --cor5: #2b313f;
+    --fundoCor: rgba(85, 82, 51, .2);
+    --labelCor: #E3E3E3;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+body{
+    background-color: var(--cor2);
+    width: 100vw;
+}
+
+.container{
+    background-color: var(--cor1);
+    width: 70%;
+    border: 0;
+    border-radius: 0 0 15px 15px;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    animation: intro 1s;
+}
+
+@keyframes intro{
+    from{
+        opacity: 0;
+        scale: 2;
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+header{
+    background-color: var(--cor3);
+    min-height: 250px;
+    border-radius: 0 0 25px 25px;
+}
+
+header > div{
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.7);
+    min-height: 150px;
+    width: 50%;
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0 auto;
+}
+
+header > section{
+    background-color: var(--cor5);
+    min-height: 100px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.5);
+    font-size: 2em;
+    font-weight: bold;
+}
+
+section > a > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    transition: .5s;
+}
+
+a > div:hover{
+    font-size: 1.2em;
+}
+
+/*                  ADICIONAR PRODUTOS                          */
+.add-product{
+    background-color: var(--fundoCor);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.add-product h1{
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.add-product div#button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.add-product button{
+    background-color: var(--cor4);
+    color: white;
+    border: 0;
+    border-radius: 25px;
+    width: 250px;
+    height: 50px;
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: .5s;
+}
+
+.add-product button:hover{
+    cursor: pointer;
+    width: 280px;
+    height: 60px;
+    border-width: 5px;
+}
+
+.add-product-content{
+    color: var(--cor4);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.add-product-content div#name-cod{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-product-content div#name-cod input{
+    background-color: var(--labelCor);
+    width: 80%;
+    min-height: 40px;
+    border: 0;
+    border-radius: 25px;
+    margin-bottom: 50px;
+    font-size: 1.2em;
+}
+
+.add-product-content div#description{
+    text-align: center;
+}
+
+.add-product-content div#description textarea{
+    background-color: var(--labelCor);
+    border: 0;
+    border-radius: 5px;
+    width: 90%;
+    height: 70%;
+    resize: none;
+    font-size: 1.2em;
+}
+
+hr{
+    border: solid 4px var(--cor5);
+}
+
+.delete{
+    background-color: var(--fundoCor);
+    height: 25%;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.delete h1{
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.delete > div#cod-delete{
+    color: var(--cor4);
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.delete input{
+    background-color: var(--labelCor);
+    min-height: 40px;
+    width: 50%;
+    border: 0;
+    border-radius: 25px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-size: 1.2em;
+}
+
+.delete button{
+    background-color: var(--cor4);
+    color: white;
+    border: 0;
+    border-radius: 25px;
+    width: 250px;
+    height: 50px;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: .5s;
+}
+
+.delete button:hover{
+    cursor: pointer;
+    width: 280px;
+    height: 60px;
+    border-width: 5px;
+}
+
+.update{
+    background-color: var(--fundoCor);
+    height: 21%;
+    border: 0;
+    border-radius: 0 0 15px 15px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.update h1{
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.update-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: var(--cor4);
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.update-content input{
+    background-color: var(--labelCor);
+    width: 80%;
+    min-height: 40px;
+    border: 0;
+    border-radius: 25px;
+    font-size: 1.2em;
+}
+
+.update button{
+    background-color: var(--cor4);
+    color: white;
+    border: 0;
+    border-radius: 25px;
+    width: 250px;
+    height: 50px;
+    margin-top: 30px;
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: .5s;
+}
+
+.update button:hover{
+    cursor: pointer;
+    width: 280px;
+    height: 60px;
+    border-width: 5px;
+}

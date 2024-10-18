@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./src/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./src/css/managerStyle.css">
+    <title>Gerenciar Produtos</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Adicionar/deletar produtos</h1>
+            </div>
+            <section>
+                <a href="./list.html">
+                    <div>
+                        <p>Lista Produtos</p>
+                    </div>
+                </a>
+            </section>
+        </header>
+        <section class="add-product">
+            <h1>Adicionar produtos</h1>
+            <form>
+                <div class="add-product-content">
+                    <div id="name-cod">
+                        <p>Nome do produto</p>
+                        <input type="text" id="name" required>
+                        <p>Código do produto</p>
+                        <input type="number" id="cod" required>
+                        <p>Quantidade do produto</p>
+                        <input type="number" id="quant" required>
+                    </div>
+                    <div id="description">
+                        <p>Descrição do produto</p>
+                        <textarea id="desc" required></textarea>
+                    </div>
+                </div>
+                <div id="button">
+                    <button type="submit" id="submit">Enviar</button>
+                </div>
+            </form>
+        </section>
+        <hr>
+        <section class="delete">
+            <h1>Excluir produtos</h1>
+            <div id="cod-delete">
+                <p>Código do produto</p>
+                <input type="number" id="cod-delete">
+            </div>
+            <button id="delete">Excluir</button>
+        </section>
+        <hr>
+        <section class="update">
+            <h1>Atualizar quantidade</h1>
+            <div class="update-content">
+                <div>
+                    <p>Código do produto</p>
+                    <input type="number" id="cod">
+                </div>
+                <div>
+                    <p>Quantidade adicional</p>
+                    <input type="number" id="quant-add">
+                </div>
+            </div>
+            <button id="add-quant">Atualizar</button>            
+        </section>
+    </div>
+
+
+    <p style="display: none;" id="haveProd">0</p>
+    <script src="./src/js/list.js"></script>
+</body>
+</html>
