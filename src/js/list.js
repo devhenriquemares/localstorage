@@ -8,6 +8,15 @@ if(index)
 
     quantProducts = 0;
     localStorage.setItem('productsQuant', quantProducts);
+
+    let nameProd = [];
+    let codProd = [];
+    let quantProd = [];
+    let descProd = [];
+    localStorage.setItem('nameProdArray', JSON.stringify(nameProd));
+    localStorage.setItem('codProdArray', JSON.stringify(codProd));
+    localStorage.setItem('quantProdArray', JSON.stringify(quantProd));
+    localStorage.setItem('descProdArray', JSON.stringify(descProd));
 }
 
 if(list)
@@ -99,32 +108,94 @@ if(list)
 
 //                      atribuição dos valores dos produtos dados no manager
 
-    
+    const nameProduct = document.querySelectorAll('#name-prod');
+    const quantProduct = document.querySelectorAll('#quant-prod');
+    const codProduct = document.querySelectorAll('#cod-prod');
+    const descProduct = document.querySelectorAll('#description');
+
+    nameProduct.forEach((name, indice) => {
+        name.textContent = JSON.parse(localStorage.getItem('nameProdArray'))[indice];
+    })
+
+    quantProduct.forEach((quant, indice) => {
+        quant.textContent = 'Quantidade: '+ JSON.parse(localStorage.getItem('quantProdArray'))[indice];
+    })
+
+    codProduct.forEach((cod, indice) => {
+        cod.textContent = 'Código: '+ JSON.parse(localStorage.getItem('codProdArray'))[indice];
+    })
+
+    descProduct.forEach((desc, indice) => {
+        desc.textContent = JSON.parse(localStorage.getItem('descProdArray'))[indice];
+    })
 }
 
 if(manager)
 {
+//                      adicionar produtos
     const addProdButton = document.querySelector('#submit');
 
-    if(addProdButton)
-    {
-        addProdButton.addEventListener('click', () =>{
-            let quantProducts = parseInt(localStorage.getItem('productsQuant'));
+    addProdButton.addEventListener('click', () =>{
+        let quantProducts = parseInt(localStorage.getItem('productsQuant'));
 
-            const nameProd = document.querySelector('#name').value;
-            const codProd = document.querySelector('#cod').value;
-            const quantProd = document.querySelector('#quant').value;
-            const descProd = document.querySelector('#desc').value;
+        const nameProd = document.querySelector('#name').value;
+        const codProd = document.querySelector('#cod').value;
+        const quantProd = document.querySelector('#quant').value;
+        const descProd = document.querySelector('#desc').value;
 
-            if(nameProd != '' && codProd != '' && quantProd != '' && descProd != '')
+        if(nameProd != '' && codProd != '' && quantProd != '' && descProd != '')
+        {
+            localStorage.setItem('productsQuant', quantProducts +1);
+
+            localStorage.setItem('nameProd', nameProd);
+            localStorage.setItem('codProd', codProd);
+            localStorage.setItem('quantProd', quantProd);
+            localStorage.setItem('descProd', descProd);
+
+        //                          arrays de nomes etc...
+            let nameProdArray = JSON.parse(localStorage.getItem('nameProdArray'));
+            let codProdArray = JSON.parse(localStorage.getItem('codProdArray'));
+            let quantProdArray = JSON.parse(localStorage.getItem('quantProdArray'));
+            let descProdArray = JSON.parse(localStorage.getItem('descProdArray'));
+
+            nameProdArray.push(localStorage.getItem('nameProd'));
+            codProdArray.push(localStorage.getItem('codProd'));
+            quantProdArray.push(localStorage.getItem('quantProd'));
+            descProdArray.push(localStorage.getItem('descProd'));
+
+            localStorage.setItem('nameProdArray', JSON.stringify(nameProdArray));
+            localStorage.setItem('codProdArray', JSON.stringify(codProdArray));
+            localStorage.setItem('quantProdArray', JSON.stringify(quantProdArray));
+            localStorage.setItem('descProdArray', JSON.stringify(descProdArray));
+        }
+    });
+
+//                           deletar produtos
+    const deleteProdButton = document.querySelector('#delete');
+
+    deleteProdButton.addEventListener('click', () =>{
+        const codProdDel = document.querySelector('#cod-delete').value;
+
+        for(let i = 0; i < length(localStorage.getItem('codProdArray')); i++)
+        {
+            if(codProdDel === JSON.parse(localStorage.getItem('codProdArray'))[i])
             {
-                localStorage.setItem('productsQuant', quantProducts +1);
+                let nameProdArray = JSON.parse(localStorage.getItem('nameProdArray'));
+                let codProdArray = JSON.parse(localStorage.getItem('codProdArray'));
+                let quantProdArray = JSON.parse(localStorage.getItem('quantProdArray'));
+                let descProdArray = JSON.parse(localStorage.getItem('descProdArray'));
 
-                localStorage.setItem('nameProd', nameProd);
-                localStorage.setItem('codProd', codProd);
-                localStorage.setItem('quantProd', quantProd);
-                localStorage.setItem('descProd', descProd);
+                nameProdArray.splice(i);
+                codProdArray.splice(i);
+                quantProdArray.splice(i);
+                descProdArray.splice(i);
+
+                localStorage.setItem('nameProdArray', JSON.stringify(nameProdArray));
+                localStorage.setItem('codProdArray', JSON.stringify(codProdArray));
+                localStorage.setItem('quantProdArray', JSON.stringify(quantProdArray));
+                localStorage.setItem('descProdArray', JSON.stringify(descProdArray));
             }
-        });
-    }
+        }
+    })
+
 }
