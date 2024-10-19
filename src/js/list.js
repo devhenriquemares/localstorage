@@ -1,152 +1,130 @@
-//                  MUDA PAGINA VAZIA OU PREENCHIDA
-const listEmpty = document.querySelector('#empty');
-const listFilled = document.querySelector('#filled');
+const index = document.querySelector('#initial-content');
+const list = document.querySelector('#products');
+const manager = document.querySelector('.add-product');
 
-if(!localStorage.getItem('haveProd') || parseInt(localStorage.getItem('haveProd')) === 0)
+if(index)
 {
-    if(listEmpty && listFilled)
-    {
-        listEmpty.classList.remove('hidden');
-        listFilled.classList.add('hidden');
-    }
-}
-else 
-{
-    if(listEmpty && listFilled)
-    {
-        listEmpty.classList.add('hidden');
-        listFilled.classList.remove('hidden');
-    }
+    localStorage.clear();
+
+    quantProducts = 0;
+    localStorage.setItem('productsQuant', quantProducts);
 }
 
-
-//                  CRIAÇÃO DE PRODUTOS EM LIST
-
-//                      CORPO
-let prodDiv = document.getElementById('products');
-let novoProd = document.createElement('section');
-let pName = document.createElement('p');
-let pQuant = document.createElement('p');
-let pCod = document.createElement('p');
-let novoDescButton = document.createElement('button');
-let novaDesc = document.createElement('section');
-let hr = document.createElement('hr');
-
-//                      ATRIBUIÇOES
-novoProd.setAttribute('id', 'prod');
-pName.setAttribute('id', 'name-prod');
-pQuant.setAttribute('id', 'quant-prod');
-pCod.setAttribute('id', 'cod-prod');
-novoDescButton.setAttribute('id', 'desc-prod');
-novaDesc.setAttribute('id', 'description');
-novaDesc.classList.add('hidden');
-
-//                      TEXTOS
-pName.innerHTML = 'Nome do produto';
-pQuant.innerHTML = 'Quantidade: X';
-pCod.innerHTML = 'Código: X';
-novoDescButton.innerHTML = 'Descrição do produto';
-
-//                      ENCORPORAR
-if(prodDiv && novoProd)
+if(list)
 {
-    novoProd.appendChild(pName);
-    novoProd.appendChild(pQuant);
-    novoProd.appendChild(pCod);
-    novoProd.appendChild(novoDescButton);
-    prodDiv.appendChild(novoProd);
-    prodDiv.appendChild(novaDesc);
-    prodDiv.appendChild(hr);
-}
-
-//                  LIST
-const descButton = document.querySelector('#desc-prod');
-const desc = document.querySelector('#description');
-const nameProd = document.querySelector('#name-prod');
-const cod = document.querySelector('#cod-prod');
-const quant = document.querySelector('#quant-prod');
-
-if(descButton && desc)
-{
-    descButton.addEventListener('click', function(){
-
-        if(window.getComputedStyle(desc).animationName === 'descFadeIn')
-        {
-            desc.style.animation = "descFadeOut 1s ease-out";
-            setTimeout(() =>{
-                desc.classList.add('hidden');
-            }, 1000);
-        }
-        else
-        {   
-            desc.classList.remove('hidden');
-            desc.style.animation = "descFadeIn 1s ease-out";
-        }
-    })
-}
-
-if(nameProd && cod && desc && quant)
-{
-    nameProd.textContent = localStorage.getItem('nameProd');
-    cod.textContent = 'Código:' + localStorage.getItem('codProd')
-    quant.textContent = 'Quantidade: ' + localStorage.getItem('quantProd');
-    desc.textContent = localStorage.getItem('descProd');
-}
-
-//                 MANAGER
-
-//                  ARRAYS
-const prodNames = [];
-
-//prodNames.push(localStorage.getItem('nameProd'));
-
-
-
-const save = document.querySelector('#submit');
-let haveProd = document.querySelector('#haveProd');
-
-if(localStorage.getItem('haveProd') && haveProd)
-{
-    haveProd.textContent = localStorage.getItem('haveProd');
-}
-else
-{
-    if(haveProd)
-    {
-        if(parseInt(haveProd.textContent) === 0)
-        {
-            localStorage.setItem('haveProd', parseInt(haveProd.textContent));
-        }
+//                      adicionar quantidade de produtos
     
-        console.log(localStorage.getItem('haveProd'));
+    function createProd(){
+    //                      corpo do novo produto
+        let prodDiv = document.querySelector('#products');
+        let hr = document.createElement('hr');
+        let newProd = document.createElement('section');
+        let pNameProd = document.createElement('p');
+        let pQuantProd = document.createElement('p');
+        let pCodProd = document.createElement('p');
+        let descButton = document.createElement('button');
+        let newDescProd = document.createElement('section');
+
+    //                      atribuições do novo corpo do produto
+        newProd.setAttribute('id', 'prod');
+        pNameProd.setAttribute('id', 'name-prod');
+        pQuantProd.setAttribute('id', 'quant-prod');
+        pCodProd.setAttribute('id', 'cod-prod');
+        descButton.setAttribute('id', 'desc-prod');
+        newDescProd.setAttribute('id', 'description');
+        newDescProd.classList.add('hidden');
+
+    //                      textos predefinidos
+        pNameProd.innerHTML = 'Nome do produto';
+        pQuantProd.innerHTML = 'Quantidade: X';
+        pCodProd.innerHTML = 'Código: X';
+        descButton.innerHTML = 'Descrição do produto';
+        newDescProd.textContent = 'abc teste';
+
+        newProd.appendChild(pNameProd);
+        newProd.appendChild(pQuantProd);
+        newProd.appendChild(pCodProd);
+        newProd.appendChild(descButton);
+        prodDiv.appendChild(hr)
+        prodDiv.appendChild(newProd);
+        prodDiv.appendChild(newDescProd);
+    }
+
+//                      criação de produtos automaticamente
+    for(let i = 0; i < localStorage.getItem('productsQuant'); i++)
+    {
+        createProd();
+    }
+
+//                      aparece/esconde a descrição
+    const descRevel = document.querySelectorAll('#desc-prod');
+    const descProd = document.querySelectorAll('#description');
+
+    descRevel.forEach((botao, indice) => {
+        botao.addEventListener('click', () =>{
+            const desc = descProd[indice];
+
+            if(window.getComputedStyle(desc).animationName === "descFadeOut")
+            {
+                desc.classList.remove('hidden');
+                desc.style.animation = "descFadeIn 1s ease-out";
+            }
+            else if(window.getComputedStyle(desc).animationName === "descFadeIn")
+            {
+                desc.style.animation = "descFadeOut 1s ease-out";
+    
+                setTimeout(()=>{
+                    desc.classList.add('hidden');
+                }, 1000);
+            }
+        })       
+    });
+
+//                      verifica se a lista esta vazia ou nao
+    const emptyList = document.querySelector('#empty');
+    const filledList = document.querySelector('#filled');
+
+    let quantProducts = parseInt(localStorage.getItem('productsQuant'));
+
+    if(quantProducts != 0)
+    {
+        emptyList.classList.add('hidden');
+        filledList.classList.remove('hidden');
+    }
+    else if(quantProducts === 0)
+    {
+        filledList.classList.add('hidden');
+        emptyList.classList.remove('hidden');
+    }
+
+//                      atribuição dos valores dos produtos dados no manager
+
+    
+}
+
+if(manager)
+{
+    const addProdButton = document.querySelector('#submit');
+
+    if(addProdButton)
+    {
+        addProdButton.addEventListener('click', () =>{
+            let quantProducts = parseInt(localStorage.getItem('productsQuant'));
+
+            const nameProd = document.querySelector('#name').value;
+            const codProd = document.querySelector('#cod').value;
+            const quantProd = document.querySelector('#quant').value;
+            const descProd = document.querySelector('#desc').value;
+
+            if(nameProd != '' && codProd != '' && quantProd != '' && descProd != '')
+            {
+                localStorage.setItem('productsQuant', quantProducts +1);
+
+                localStorage.setItem('nameProd', nameProd);
+                localStorage.setItem('codProd', codProd);
+                localStorage.setItem('quantProd', quantProd);
+                localStorage.setItem('descProd', descProd);
+            }
+        });
     }
 }
-
-if(save)
-{   
-
-    save.addEventListener('click', () =>{
-
-        const nome = document.querySelector('#name').value;
-        const codigo = document.querySelector('#cod').value;
-        const description = document.querySelector('#desc').value;
-        const quantidade = document.querySelector('#quant').value;
-
-        if(nome != '' && quantidade != '' && cod != '' && description != '')
-        {
-            localStorage.setItem('nameProd', nome);
-            localStorage.setItem('codProd', codigo);
-            localStorage.setItem('quantProd', quantidade);
-            localStorage.setItem('descProd', description);
-
-            localStorage.setItem('haveProd', haveProd);
-            localStorage.setItem('haveProd', parseInt(haveProd.textContent) + 1);
-            haveProd.textContent = localStorage.getItem('haveProd');
-
-        }
-    })
-}
-
-prodNames[0] = localStorage.getItem('nameProd');
-
-console.log(prodNames[0]);

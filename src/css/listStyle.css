@@ -92,7 +92,7 @@ div#empty a > div:hover{
     font-size: 1.2em;
 }
 
-div#empty #initial-content{
+div#empty #empty-list{
     width: 70%;
     margin: 15% auto 0 auto;
     text-align: center;
@@ -106,7 +106,6 @@ div#empty #initial-content{
     background-color: var(--cor1);
     width: 70%;
     border: 0;
-    border-radius: 0 0 15px 15px;
     margin: 0 auto;
     margin-bottom: 60px;
     animation: intro 1s;
