@@ -128,6 +128,19 @@ if(list)
     descProduct.forEach((desc, indice) => {
         desc.textContent = JSON.parse(localStorage.getItem('descProdArray'))[indice];
     })
+
+//                      exclue produtos caso esteja vazio
+    const prod = document.querySelectorAll('#prod');
+    const cod = document.querySelectorAll('#cod-prod');
+    const desc = document.querySelectorAll('#description');
+
+    cod.forEach((codProd, indice) => {
+        if(codProd.textContent === 'Código: undefined')
+        {
+            prod[indice].remove();
+            desc[indice].remove();
+        }
+    })
 }
 
 if(manager)
@@ -143,30 +156,53 @@ if(manager)
         const quantProd = document.querySelector('#quant').value;
         const descProd = document.querySelector('#desc').value;
 
-        if(nameProd != '' && codProd != '' && quantProd != '' && descProd != '')
+        //                      verifica se o produto ja existe
+        const namesArray = JSON.parse(localStorage.getItem('nameProdArray'));
+        const codsArray = JSON.parse(localStorage.getItem('codProdArray'));
+        
+        for(let i = 0; i <= quantProducts; i++)
         {
-            localStorage.setItem('productsQuant', quantProducts +1);
+            if(nameProd === namesArray[i])
+            {
+                alert('Este produto já existe...');
+                break;
+            }
+            else if(codProd === codsArray[i])
+            {
+                alert('O código deste produto já está sendo usado...')
+                break;
+            }
+            else if(i === quantProducts)
+            {
+                //                          adiciona o produto
+                if(nameProd != '' && codProd != '' && quantProd != '' && descProd != '')
+                {
+                    localStorage.setItem('productsQuant', quantProducts +1);
+        
+                    localStorage.setItem('nameProd', nameProd);
+                    localStorage.setItem('codProd', codProd);
+                    localStorage.setItem('quantProd', quantProd);
+                    localStorage.setItem('descProd', descProd);
+        
+                //                          arrays de nomes etc...
+                    let nameProdArray = JSON.parse(localStorage.getItem('nameProdArray'));
+                    let codProdArray = JSON.parse(localStorage.getItem('codProdArray'));
+                    let quantProdArray = JSON.parse(localStorage.getItem('quantProdArray'));
+                    let descProdArray = JSON.parse(localStorage.getItem('descProdArray'));
+        
+                    nameProdArray.push(localStorage.getItem('nameProd'));
+                    codProdArray.push(localStorage.getItem('codProd'));
+                    quantProdArray.push(localStorage.getItem('quantProd'));
+                    descProdArray.push(localStorage.getItem('descProd'));
+        
+                    localStorage.setItem('nameProdArray', JSON.stringify(nameProdArray));
+                    localStorage.setItem('codProdArray', JSON.stringify(codProdArray));
+                    localStorage.setItem('quantProdArray', JSON.stringify(quantProdArray));
+                    localStorage.setItem('descProdArray', JSON.stringify(descProdArray));
 
-            localStorage.setItem('nameProd', nameProd);
-            localStorage.setItem('codProd', codProd);
-            localStorage.setItem('quantProd', quantProd);
-            localStorage.setItem('descProd', descProd);
-
-        //                          arrays de nomes etc...
-            let nameProdArray = JSON.parse(localStorage.getItem('nameProdArray'));
-            let codProdArray = JSON.parse(localStorage.getItem('codProdArray'));
-            let quantProdArray = JSON.parse(localStorage.getItem('quantProdArray'));
-            let descProdArray = JSON.parse(localStorage.getItem('descProdArray'));
-
-            nameProdArray.push(localStorage.getItem('nameProd'));
-            codProdArray.push(localStorage.getItem('codProd'));
-            quantProdArray.push(localStorage.getItem('quantProd'));
-            descProdArray.push(localStorage.getItem('descProd'));
-
-            localStorage.setItem('nameProdArray', JSON.stringify(nameProdArray));
-            localStorage.setItem('codProdArray', JSON.stringify(codProdArray));
-            localStorage.setItem('quantProdArray', JSON.stringify(quantProdArray));
-            localStorage.setItem('descProdArray', JSON.stringify(descProdArray));
+                    break;
+                }
+            }
         }
     });
 
@@ -174,28 +210,61 @@ if(manager)
     const deleteProdButton = document.querySelector('#delete');
 
     deleteProdButton.addEventListener('click', () =>{
-        const codProdDel = document.querySelector('#cod-delete').value;
+        const codProdDel = document.querySelector('#delete-cod').value;
 
-        for(let i = 0; i < length(localStorage.getItem('codProdArray')); i++)
+        let nameArray = JSON.parse(localStorage.getItem('nameProdArray'));
+        let quantArray = JSON.parse(localStorage.getItem('quantProdArray'));
+        let codArray = JSON.parse(localStorage.getItem('codProdArray'));
+        let descArray = JSON.parse(localStorage.getItem('descProdArray'));
+
+        for(let i = 0; i <= codArray.length; i++)
         {
-            if(codProdDel === JSON.parse(localStorage.getItem('codProdArray'))[i])
+            if(codProdDel === codArray[i])
             {
-                let nameProdArray = JSON.parse(localStorage.getItem('nameProdArray'));
-                let codProdArray = JSON.parse(localStorage.getItem('codProdArray'));
-                let quantProdArray = JSON.parse(localStorage.getItem('quantProdArray'));
-                let descProdArray = JSON.parse(localStorage.getItem('descProdArray'));
+                nameArray.splice(i, 1);
+                quantArray.splice(i, 1);
+                codArray.splice(i, 1);
+                descArray.splice(i, 1);
 
-                nameProdArray.splice(i);
-                codProdArray.splice(i);
-                quantProdArray.splice(i);
-                descProdArray.splice(i);
+                localStorage.setItem('nameProdArray', JSON.stringify(nameArray));
+                localStorage.setItem('quantProdArray', JSON.stringify(quantArray));
+                localStorage.setItem('codProdArray', JSON.stringify(codArray));
+                localStorage.setItem('descProdArray', JSON.stringify(descArray));
 
-                localStorage.setItem('nameProdArray', JSON.stringify(nameProdArray));
-                localStorage.setItem('codProdArray', JSON.stringify(codProdArray));
-                localStorage.setItem('quantProdArray', JSON.stringify(quantProdArray));
-                localStorage.setItem('descProdArray', JSON.stringify(descProdArray));
+                let quantProducts = parseInt(localStorage.getItem('productsQuant'));
+                localStorage.setItem('productsQuant', quantProducts -1);
+            }
+            else if(i === codArray.length)
+            {
+                alert('Código inválido...');
+            }
+        }
+    });
+
+//                                  atualizar quantidade
+    const updateButton = document.querySelector('#add-quant');
+
+    updateButton.addEventListener('click', () => {
+        const codUpdate = document.querySelector('#cod-update').value;
+        const quantAdd = document.querySelector('#quant-add').value;
+        const codsArray = JSON.parse(localStorage.getItem('codProdArray'));
+        const quantArray = JSON.parse(localStorage.getItem('quantProdArray'));
+
+        const quantProducts = parseInt(localStorage.getItem('productsQuant'));
+
+        for(let i = 0; i <= quantProducts; i++)
+        {
+            if(codUpdate === codsArray[i])
+            {
+                quantArray[i] = parseInt(quantArray[i]) + parseInt(quantAdd);
+                localStorage.setItem('quantProdArray', JSON.stringify(quantArray));
+                break;
+            }
+            else if(i === quantProducts)
+            {
+                alert('Código inválido');
+                break;
             }
         }
     })
-
 }

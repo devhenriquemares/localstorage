@@ -49,7 +49,7 @@
             <form>    
                 <div id="cod-delete">
                     <p>Código do produto</p>
-                    <input type="number" id="cod-delete" required>
+                    <input type="number" id="delete-cod" required>
                 </div>
                 <button id="delete">Excluir</button>
             </form>
@@ -57,17 +57,19 @@
         <hr>
         <section class="update">
             <h1>Atualizar quantidade</h1>
-            <div class="update-content">
-                <div>
-                    <p>Código do produto</p>
-                    <input type="number" id="cod">
+            <form>
+                <div class="update-content">
+                    <div>
+                        <p>Código do produto</p>
+                        <input type="number" id="cod-update" required>
+                    </div>
+                    <div>
+                        <p>Quantidade adicional</p>
+                        <input type="number" id="quant-add" required>
+                    </div>
                 </div>
-                <div>
-                    <p>Quantidade adicional</p>
-                    <input type="number" id="quant-add">
-                </div>
-            </div>
-            <button id="add-quant">Atualizar</button>            
+                <button id="add-quant">Atualizar</button>   
+            </form>     
         </section>
     </div>
     
