@@ -1,0 +1,127 @@
+@charset "UFT-8";
+
+/*              lista vazia                 */
+@media screen and (max-width: 759px) {
+    div#empty .container{
+        width: 100vw;
+    }
+
+    div#empty header > div{
+        font-size: 1em;
+        width: 100%;
+    }
+
+    div#empty header > section{
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    div#empty a > div:hover{
+        font-size: 1em;
+    }
+
+    div#empty #empty-list{
+        font-size: 3em;
+    }
+}
+
+@media screen and (min-width: 400px){
+    div#empty #empty-list{
+        font-size: 4em;
+    }
+}
+
+@media screen and (min-width: 500px){
+    div#empty header > div{
+        font-size: 1.2em;
+    }
+
+    div#empty header > section{
+        font-size: 2em;
+    }
+
+    div#empty #empty-list{
+        font-size: 5em;
+    }
+}
+
+@media screen and (min-width: 759px){
+    div#empty .container{
+        width: 80%;
+    }
+
+    div#empty header > div{
+        width: auto;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    div#empty .container{
+        width: 70%;
+    }
+
+    div#empty header > div{
+        font-size: 1.5em;
+    }
+}
+
+/*              lista preenchida                 */
+@media screen and (max-width: 759px) {
+    .container{
+        width: 100vw;
+    }
+
+    header > div{
+        font-size: 1em;
+        width: 100%;
+    }
+
+    header > section{
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    a > div:hover{
+        font-size: 1em;
+    }
+
+    section#description{
+        font-size: 1em;
+    }
+}
+
+@media screen and (min-width: 350px){
+    section#description{
+        font-size: 1.5em;
+    }
+}
+
+@media screen and (min-width: 500px){
+    header > div{
+        font-size: 1.2em;
+    }
+
+    header > section{
+        font-size: 2em;
+    }
+}
+
+@media screen and (min-width: 759px){
+    .container{
+        width: 80%;
+    }
+
+    header > div{
+        width: auto;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .container{
+        width: 70%;
+    }
+
+    header > div{
+        font-size: 1.5em;
+    }
+}

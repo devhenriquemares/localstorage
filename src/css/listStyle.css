@@ -25,7 +25,7 @@ a{
 
 body{
     background-color: var(--cor2);
-    width: 100vw;
+    width: 100%;
 }
 
 /*                  REMOVER LISTA               */
@@ -176,7 +176,10 @@ section#products h1{
 
 section#prod{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
+    gap: 15px;
+    text-align: center;
     background-color: var(--fundoCor);
     color: var(--cor4);
     font-size: 1.8em;
@@ -194,6 +197,11 @@ section#prod button{
 
 button:hover{
     cursor: pointer;
+}
+
+p#name-prod{
+    overflow: hidden;
+    width: 100%;
 }
 
 section#description{

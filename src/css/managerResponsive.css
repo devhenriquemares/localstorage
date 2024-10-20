@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+@media screen and (max-width: 759px) {
+    .container{
+        width: 100%;
+    }
+
+    header > div{
+        width: 100%;
+        font-size: 1em;
+    }
+
+    a > div:hover{
+        font-size: 1em;
+    }
+
+    .add-product-content{
+        grid-template-columns: 1fr;
+    }
+
+    .add-product-content div#name-cod input{
+        margin-bottom: 20px;
+    }
+
+    textarea{
+        margin-bottom: 100px;
+    }
+
+    .update-content{
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media screen and (min-width: 400px){
+    header > div{
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (min-width: 500px){
+    header > div{
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 759px) and (max-width: 860px){
+    .update-content{
+        font-size: 1.5em;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    header > div{
+        font-size: 1.5em;
+    }
+}
