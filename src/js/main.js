@@ -217,6 +217,8 @@ if(manager)
         let codArray = JSON.parse(localStorage.getItem('codProdArray'));
         let descArray = JSON.parse(localStorage.getItem('descProdArray'));
 
+        const quantProducts = parseInt(localStorage.getItem('productsQuant'));
+
         for(let i = 0; i <= codArray.length; i++)
         {
             if(codProdDel === codArray[i])
@@ -234,7 +236,7 @@ if(manager)
                 let quantProducts = parseInt(localStorage.getItem('productsQuant'));
                 localStorage.setItem('productsQuant', quantProducts -1);
             }
-            else if(i === codArray.length)
+            else if(i === quantProducts)
             {
                 alert('Código inválido...');
             }
